@@ -10,6 +10,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class InvestimentoController {
     public Page<Investimento> listInvestimento(@RequestParam(required = false, defaultValue = "0") @PositiveOrZero Integer page,
                                                @RequestParam(required = false, defaultValue = "20") @Positive Integer size) {
 
-        PageRequest request = PageRequest.of(page, size);
+        PageRequest request = PageRequest.of(page, size, Sort.by("id"));
         return service.list(request);
     }
 
